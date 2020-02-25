@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion compileSdkVer
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.developers.paginglibrary"
+        minSdkVersion minSdkVer
+        targetSdkVersion targetSdkVer
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildTypes.each {
+        it.buildConfigField('String', "MOVIES_KEY", API_KEY)
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$buildToolsVer"
+    implementation "androidx.core:core-ktx:$coreKtxVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    testImplementation "junit:junit:$junitVer"
+    androidTestImplementation "androidx.test:runner:$androidTestRunnerVer"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+
+    // Kotlin coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesCoreVer"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesAndroidVer"
+
+    // Paging library
+    implementation "android.arch.paging:runtime:$pagingLibraryVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitConverterGsonVer"
+
+    // Arch component
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+}
